@@ -22,4 +22,5 @@
         </c:forEach>
         </tbody>
     </table>
+    <util:pagination phones="${phones}"/>
 </common:page>
