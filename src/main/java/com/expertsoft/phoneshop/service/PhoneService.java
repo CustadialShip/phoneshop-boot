@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class PhoneService {
@@ -16,5 +17,9 @@ public class PhoneService {
 
     public Page<Phone> getPhonesPage(Pageable pageable) {
         return phoneRepository.findAll(pageable);
+    }
+
+    public Phone getPhoneById(Long id) {
+        return phoneRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 }
