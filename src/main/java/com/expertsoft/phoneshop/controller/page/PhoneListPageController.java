@@ -5,13 +5,12 @@ import com.expertsoft.phoneshop.persistence.model.Phone;
 import com.expertsoft.phoneshop.properties.PhoneShopProperties;
 import com.expertsoft.phoneshop.service.PhoneService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 
@@ -33,9 +32,8 @@ public class PhoneListPageController {
 
     @GetMapping
     public String getPhoneList(@ModelAttribute SearchFormDto searchFormDto,
-                               @RequestParam(defaultValue = "0") int page, Model model) {
-        Page<Phone> phones = phoneService
-                .searchByQueryAndPrice(PageRequest.of(page, phoneShopProperties.getPlpEntityPageQuantity()), searchFormDto);
+                               Pageable pageable, Model model) {
+        Page<Phone> phones = phoneService.searchByQueryAndPrice(pageable, searchFormDto);
         model.addAttribute(PHONES, phones);
         model.addAttribute(SEARCH_FORM, searchFormDto);
 
