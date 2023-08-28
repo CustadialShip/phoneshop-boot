@@ -1,7 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ attribute name="phones" required="true" type="org.springframework.data.domain.Page" %>
 <%@ attribute name="maxPages" required="true" type="java.lang.Integer" %>
+<%@ attribute name="searchForm" required="true" type="com.expertsoft.phoneshop.dto.SearchFormDto" %>
 
+<c:set var="searchParams" value="searchQuery=${searchForm.searchQuery}&fromPrice=${searchForm.fromPrice}&toPrice=${searchForm.toPrice}"/>
+
+<c:set var="maxPages" value="${maxPages > phones.totalPages ? phones.totalPages : maxPages}"/>
 <c:set var="lowerBound" value="${phones.pageable.pageNumber - (maxPages - 1) / 2}"/>
 <c:set var="upperBound" value="${phones.pageable.pageNumber + (maxPages - 1) / 2}"/>
 <c:choose>
@@ -25,17 +29,17 @@
     <ul class="pagination d-flex justify-content-center">
         <li class="page-item">
             <c:if test="${phones.hasPrevious()}">
-                <a class="page-link" href="?page=${phones.previousOrFirstPageable().pageNumber}"><<</a>
+                <a class="page-link" href="?page=${phones.previousOrFirstPageable().pageNumber}&${searchParams}"><<</a>
             </c:if>
         </li>
         <c:forEach begin="${begin}" end="${end}" var="i">
             <li class="${phones.pageable.pageNumber eq i ? "page-item active" : "page-item"}">
-                <a class="page-link" href="?page=${i}">${i + 1}</a>
+                <a class="page-link" href="?page=${i}&${searchParams}">${i + 1}</a>
             </li>
         </c:forEach>
         <li class="page-item">
             <c:if test="${phones.hasNext()}">
-                <a class="page-link" href="?page=${phones.nextOrLastPageable().pageNumber}">>></a>
+                <a class="page-link" href="?page=${phones.nextOrLastPageable().pageNumber}&${searchParams}">>></a>
             </c:if>
         </li>
     </ul>
