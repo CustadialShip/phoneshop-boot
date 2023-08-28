@@ -13,6 +13,9 @@
             <div class="card">
                 <div class="card-body">
                     <form:form method="get" modelAttribute="searchForm" action="/phones">
+                        <c:if test="${not empty param.sort}">
+                            <input type="hidden" name="sort" value="${param.sort}"/>
+                        </c:if>
                         <div class="row mb-3">
                             <form:label path="searchQuery" for="searchQuery" class="col-4">
                                 Search query:
@@ -48,9 +51,9 @@
                 <thead>
                 <tr>
                     <th scope="col">Image</th>
-                    <th scope="col">Brand <util:sorting/></th>
-                    <th scope="col">Model <util:sorting/></th>
-                    <th scope="col">Price <util:sorting/></th>
+                    <th scope="col">Brand <util:sorting field="brand"/></th>
+                    <th scope="col">Model <util:sorting field="model"/></th>
+                    <th scope="col">Price <util:sorting field="price"/></th>
                 </tr>
                 </thead>
                 <tbody>
