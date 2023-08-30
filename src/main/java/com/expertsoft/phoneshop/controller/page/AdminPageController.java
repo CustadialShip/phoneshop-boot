@@ -42,8 +42,8 @@ public class AdminPageController {
         return userService.getCurrentUserDisplayName();
     }
 
-    @ModelAttribute
-    public void setMaxPagesAttribute(Model model) {
-        model.addAttribute(MAX_PAGES, phoneShopProperties.getAdminMaxPages());
+    @ModelAttribute(MAX_PAGES)
+    public int setMaxPagesAttribute() {
+        return phoneShopProperties.getAdminMaxPages();
     }
 }

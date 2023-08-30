@@ -44,9 +44,9 @@ public class PhoneListPageController {
         return PHONE_LIST_PAGE;
     }
 
-    @ModelAttribute
-    public void setMaxPagesAttribute(Model model) {
-        model.addAttribute(MAX_PAGES, phoneShopProperties.getPlpMaxPages());
+    @ModelAttribute(MAX_PAGES)
+    public int setMaxPagesAttribute() {
+        return phoneShopProperties.getPlpMaxPages();
     }
 
     @ModelAttribute(DISPLAY_NAME)
