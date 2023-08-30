@@ -67,5 +67,5 @@
             <h2>Oops! Nothing found for your request...</h2>
         </c:otherwise>
     </c:choose>
-    <util:pagination phones="${phones}" maxPages="${maxPages}" searchForm="${searchForm}"/>
+    <util:pagination entities="${phones}" maxPages="${maxPages}" searchForm="${searchForm}"/>
 </common:page>
