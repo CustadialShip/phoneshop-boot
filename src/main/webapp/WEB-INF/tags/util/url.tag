@@ -16,8 +16,8 @@
     <c:if test="${not empty page}">
         <c:param name="page" value="${page}"/>
     </c:if>
-    <c:if test="${not empty param.query}">
-        <c:param name="query" value="${param.query}"/>
+    <c:if test="${not empty param.searchQuery}">
+        <c:param name="searchQuery" value="${param.searchQuery}"/>
     </c:if>
     <c:if test="${not empty param.fromPrice}">
         <c:param name="fromPrice" value="${param.fromPrice}"/>

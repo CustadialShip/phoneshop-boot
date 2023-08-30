@@ -4,6 +4,7 @@ import com.expertsoft.phoneshop.dto.SearchFormDto;
 import com.expertsoft.phoneshop.persistence.model.Phone;
 import com.expertsoft.phoneshop.properties.PhoneShopProperties;
 import com.expertsoft.phoneshop.service.PhoneService;
+import com.expertsoft.phoneshop.service.PhoneShopUserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,14 @@ public class PhoneListPageController {
     private static final String PHONES = "phones";
     private static final String MAX_PAGES = "maxPages";
     private static final String SEARCH_FORM = "searchForm";
+    private static final String DISPLAY_NAME = "displayName";
 
     @Resource
     private PhoneService phoneService;
     @Resource
     private PhoneShopProperties phoneShopProperties;
+    @Resource
+    private PhoneShopUserService userService;
 
     @GetMapping
     public String getPhoneList(@ModelAttribute SearchFormDto searchFormDto,
@@ -43,5 +47,10 @@ public class PhoneListPageController {
     @ModelAttribute
     public void setMaxPagesAttribute(Model model) {
         model.addAttribute(MAX_PAGES, phoneShopProperties.getPlpMaxPages());
+    }
+
+    @ModelAttribute(DISPLAY_NAME)
+    public String getCurrentUserName() {
+        return userService.getCurrentUserDisplayName();
     }
 }

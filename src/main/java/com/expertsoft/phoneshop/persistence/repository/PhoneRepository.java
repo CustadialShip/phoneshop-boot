@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.math.BigDecimal;
 
 public interface PhoneRepository extends JpaRepository<Phone, Long> {
+
     @Query("SELECT p FROM Phone p WHERE (LOWER(p.brand) LIKE LOWER(CONCAT('%', :searchQuery, '%')) " +
             "OR LOWER(p.model) LIKE LOWER(CONCAT('%', :searchQuery, '%')))" +
             "AND p.price >= :fromPrice AND p.price <= :toPrice")
